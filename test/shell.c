@@ -7,7 +7,7 @@ void sigint_handler()
  * main -my own shell program
  * Return: 0 if success, otherwise -1
  */
-int main(int argc __attribute((unused)),char **argv)
+int main(int argc __attribute((unused)),char **argv, char **env)
 {
 
 	char *line;
@@ -15,7 +15,7 @@ int main(int argc __attribute((unused)),char **argv)
 	char **tokens;
 	int i;
 
-	if (isatty(STDIN_FILENO) == 1)
+	if (isatty(STDIN_FILENO) == 1) /*check if we are in interactive mode*/
 	{
 		while (1)
 		{
@@ -35,7 +35,7 @@ int main(int argc __attribute((unused)),char **argv)
 				exit(EXIT_SUCCESS);
 			}
 			tokens =  _split(line);
-			execute(tokens, argv);
+			execute(tokens, argv, env);
 			/*let's free each element of array*/
 			for (i = 0; tokens[i] != NULL; i++)
 			{
@@ -61,7 +61,7 @@ int main(int argc __attribute((unused)),char **argv)
 				exit(EXIT_SUCCESS);
 			}
 			tokens = _split(line);
-			execute(tokens, argv);
+			execute(tokens, argv, env);
 			/*let's free each element of array*/
 			for (i = 0; tokens[i] != NULL; i++)
 			{

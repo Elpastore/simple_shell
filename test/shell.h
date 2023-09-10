@@ -13,7 +13,7 @@
 
 char *prompt(void);
 char **_split(char *input);
-int execute(char **tokens, char **argv);
+int execute(char **tokens, char **argv, char **env);
 char *non_interactive();
 
 #endif
