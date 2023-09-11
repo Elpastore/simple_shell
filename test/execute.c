@@ -1,17 +1,20 @@
 #include "shell.h"
-
+/**
+ * execute -function for executing commands
+ * @tokens: array of tokens
+ * @argv: array of argument
+ * @env: environmen
+ * Return: 0 if success.
+ */
 int execute(char **tokens, char **argv, char **env)
 {
 	pid_t child_pid;
 	int status;
-	/**int numb_process = 5;
-	 * char *argv[] = {"/bin/ls", "-l", "/tmp", NULL};
-	 */
 
 	if (tokens[0] == NULL)
 	{
-  	/* empty command was entered */
-  		return (-1);
+		/* empty command was entered */
+		exit(EXIT_FAILURE);
 	}
 	/* Create a loop to execute 5 times a child process*/
 	else
@@ -20,7 +23,7 @@ int execute(char **tokens, char **argv, char **env)
 		if (child_pid == -1)
 		{
 			perror("Error: ");
-			return (1);
+			exit(EXIT_FAILURE);
 		}
 		if (child_pid == 0) /*Here we execute command*/
 		{
@@ -36,15 +39,6 @@ int execute(char **tokens, char **argv, char **env)
 			{
 				perror("waitpid");
 				exit(EXIT_FAILURE);
-			}
-
-			if (WIFEXITED(status))
-			{
-				/*printf("Child exited with status: %d\n", WEXITSTATUS(status));*/
-			}
-			else
-			{
-				printf("Child did not exit normally.\n");
 			}
 		}
 	}

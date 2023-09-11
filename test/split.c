@@ -32,12 +32,7 @@ char **_split(char *input)
 		token = strtok(NULL, " \t\n"); /*get the next token*/
 	}
 	tokens[count] = NULL;
-	/*printf("the number of tokens is: %d\n", count);*/
-	 /** for (i = 0; i < count; i++)
-	  *{
-	  *printf("token[%d]: %s\n", i, tokens[i]);
-	  *}
-	  */
+
 	free(cp_input);
 	return (tokens);
 }
