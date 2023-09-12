@@ -1,0 +1,49 @@
+#include "shell.h"
+
+/**
+ * check_path -program that gives the current path
+ * @tokens: array contains commands and arguments
+ * Return: array
+ */
+char *check_path(char *tokens)
+{
+	char *path = getenv("PATH");
+	char *token;
+	char *concat;
+	/*DIR *dir;*/
+	/*struct dirent *entry;*/
+
+	if (path == NULL)
+	{
+		fprintf(stderr, "PATH environment is not set\n");
+		return (1);
+	}
+	
+	token = strtok(path, ":");
+	while (token != NULL)
+	{
+		/*open the directory for reading*/
+		DIR *dir = opendir(token);
+		if (dir == NULL)
+		{
+			perror("opendir");
+			token =strtok(NULL, ":");
+			continue;
+		}
+		struct dirent *entry;
+		while ((entry = readdir(dir)) != NULL)
+		{
+			if( strcmp(entry->d_type, tokens) == 0)
+			{
+				concat = strcat(entry->d_type, tokens);
+				closedir(dir);
+				return (concat);
+			}
+			/*entry = readdir(dir);*/
+		}
+	
+		closedir(dir);
+		token = strtok(NULL, ":");
+	}
+	return (NULL);
+}

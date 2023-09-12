@@ -15,7 +15,6 @@ char *prompt(void)
 		if (feof(stdin)) /*test for eof*/
 		{
 			free(line);
-			printf("End of file reached\n");
 			exit(EXIT_SUCCESS);
 		}
 		else

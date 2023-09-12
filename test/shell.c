@@ -13,6 +13,7 @@ void interactive_mode(char **argv, char **env)
 	int i;
 
 
+
 	while (1)
 	{
 		printf("#cisfun$ ");
@@ -21,7 +22,6 @@ void interactive_mode(char **argv, char **env)
 		{
 			/*EOF(Ctrl + D) was dectected*/
 			printf("\n");
-			free(line);
 			exit(EXIT_SUCCESS);
 		}
 		tokens =  _split(line);
@@ -67,7 +67,6 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 			if (line == NULL)
 			{
 				printf("\n");
-				free(line);
 				exit(EXIT_SUCCESS);
 			}
 			tokens = _split(line);

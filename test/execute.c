@@ -10,15 +10,17 @@ int execute(char **tokens, char **argv, char **env)
 {
 	pid_t child_pid;
 	int status;
+	char *actual_command = NULL;
 
 	if (tokens[0] == NULL)
 	{
 		/* empty command was entered */
-		exit(EXIT_FAILURE);
+		return (1);
 	}
 	/* Create a loop to execute 5 times a child process*/
 	else
 	{
+		actual_command = get_path( tokens[0]);
 		child_pid = fork(); /* Here we create a child process*/
 		if (child_pid == -1)
 		{
@@ -27,7 +29,7 @@ int execute(char **tokens, char **argv, char **env)
 		}
 		if (child_pid == 0) /*Here we execute command*/
 		{
-			if ((execve(tokens[0], tokens, env) == -1))
+			if ((execve(actual_command, tokens, env) == -1))
 			{
 				perror(argv[0]);
 				exit(EXIT_FAILURE);
@@ -42,6 +44,7 @@ int execute(char **tokens, char **argv, char **env)
 			}
 		}
 	}
+	free(actual_command);
 	/*return (status);*/
 	return (0);
 }

@@ -1,6 +1,8 @@
 #ifndef SHELL_H
 #define SHELL_H
 
+extern char **environ;
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
@@ -15,6 +17,6 @@ char *prompt(void);
 char **_split(char *input);
 int execute(char **tokens, char **argv, char **env);
 char *non_interactive();
-
+char *get_path(char *tokens);
 
 #endif
