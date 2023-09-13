@@ -10,9 +10,6 @@ void interactive_mode(char **argv, char **env)
 	char *line;
 	/*char *command[] = {NULL, NULL};*/
 	char **tokens;
-	int i;
-
-
 
 	while (1)
 	{
@@ -22,21 +19,17 @@ void interactive_mode(char **argv, char **env)
 		{
 			/*EOF(Ctrl + D) was dectected*/
 			printf("\n");
-			exit(EXIT_SUCCESS);
+			free(line);
 		}
 		tokens =  _split(line);
+		if (tokens == NULL)
+			continue;
 		execute(tokens, argv, env);
 		/*let's free each element of array*/
-		for (i = 0; tokens[i] != NULL; i++)
-		{
-			free(tokens[i]);
-		}
 		/*free the array itself*/
-		free(tokens);
 
 		/*command[0] = line;*/
 		/*execute(command);*/
-		free(line);
 	}
 }
 
@@ -53,7 +46,6 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 	char *line;
 	/*char *command[] = {NULL, NULL};*/
 	char **tokens;
-	int i;
 
 	if (isatty(STDIN_FILENO) == 1) /*check if we are in interactive mode*/
 	{
@@ -63,22 +55,16 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 	{
 		while (1)
 		{
-			line = non_interactive();
+			/*line = non_interactive();*/
+			line = prompt();
 			if (line == NULL)
 			{
 				printf("\n");
+				free(line), line = NULL;
 				exit(EXIT_SUCCESS);
 			}
 			tokens = _split(line);
 			execute(tokens, argv, env);
-			/*let's free each element of array*/
-			for (i = 0; tokens[i] != NULL; i++)
-			{
-				free(tokens[i]);
-			}
-			/*free the array itself*/
-			free(tokens);
-			free(line);
 		}
 	}
 	return (0);

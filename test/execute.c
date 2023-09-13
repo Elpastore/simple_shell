@@ -10,7 +10,7 @@ int execute(char **tokens, char **argv, char **env)
 {
 	pid_t child_pid;
 	int status;
-	char *actual_command = NULL;
+	/*char *actual_command = NULL;*/
 
 	if (tokens[0] == NULL)
 	{
@@ -20,7 +20,7 @@ int execute(char **tokens, char **argv, char **env)
 	/* Create a loop to execute 5 times a child process*/
 	else
 	{
-		actual_command = get_path( tokens[0]);
+		/*actual_command = get_path( tokens[0]);*/
 		child_pid = fork(); /* Here we create a child process*/
 		if (child_pid == -1)
 		{
@@ -29,9 +29,11 @@ int execute(char **tokens, char **argv, char **env)
 		}
 		if (child_pid == 0) /*Here we execute command*/
 		{
-			if ((execve(actual_command, tokens, env) == -1))
+			if ((execve(tokens[0], tokens, env) == -1))
 			{
 				perror(argv[0]);
+				/*free(actual_command),actual_command = NULL;*/
+				free_array(tokens);
 				exit(EXIT_FAILURE);
 			}
 		}
@@ -42,9 +44,12 @@ int execute(char **tokens, char **argv, char **env)
 				perror("waitpid");
 				exit(EXIT_FAILURE);
 			}
+
+			/*free(actual_command), actual_command = NULL;*/
+			free_array(tokens);
 		}
 	}
-	free(actual_command);
+
 	/*return (status);*/
 	return (0);
 }
