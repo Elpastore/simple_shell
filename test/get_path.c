@@ -6,43 +6,42 @@
  */
 char *get_path(char *tokens)
 {
-	char *path = getenv("PATH");
+	char *path = _getenv("PATH");
 	char *token;
-	char *cp_path;
+	/*char *cp_path;*/
 	int len_tokens, len_dir;
 	char *full_path;
 	struct stat st;
-	if (path != NULL)
+	/*cp_path = strdup(path);*/
+
+	if(stat(tokens, &st) == 0)
 	{
-		cp_path = strdup(path);
-		len_tokens = strlen(tokens);
-		token = strtok(cp_path, ":");
-		while(token != NULL)
+		return (_strdup(tokens));
+	}
+	token = strtok(path, ":");
+	while(token != NULL)
+	{
+
+
+		len_tokens = _strlen(tokens);
+		len_dir = _strlen(token);
+		full_path = malloc(len_tokens + len_dir + 2);
+		if (full_path != NULL)
 		{
-			len_dir = strlen(token);
-			full_path = malloc(len_tokens + len_dir + 2);
-			strcpy(full_path, token);
-			strcat(full_path, "/");
-			strcat(full_path, tokens);
-			strcat(full_path, "\0");
+			_strcpy(full_path, token);
+			_strcat(full_path, "/");
+			_strcat(full_path, tokens);
 
 			if (stat(full_path, &st) == 0)
 			{
-				free(cp_path);
+				free(path);
 				return (full_path);
 			}
-			else
-			{
-				free(full_path);
-				token = strtok(NULL, ":");
-			}
+			free(full_path), full_path = NULL;
+			token = strtok(NULL, ":");
 		}
-		free(cp_path);
-		if(stat(tokens, &st) == 0)
-		{
-			return (tokens);
-		}
-		return (NULL);
 	}
+	free(path);
+
 	return (NULL);
 }

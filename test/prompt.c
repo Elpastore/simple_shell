@@ -15,13 +15,14 @@ char *prompt(void)
 		if (feof(stdin)) /*test for eof*/
 		{
 			free(line);
-			exit(EXIT_SUCCESS);
+			write(STDOUT_FILENO, "\n", 1);
+			exit(0);
 		}
 		else
 		{
 			free(line);
 			perror("getline");
-			exit(EXIT_FAILURE);
+			exit(127);
 		}
 	}
 	/* Delete new line char*/

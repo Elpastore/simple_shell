@@ -10,15 +10,18 @@ void interactive_mode(char **argv, char **env)
 	char *line;
 	/*char *command[] = {NULL, NULL};*/
 	char **tokens;
+	char *prompt_shell = "#cisfun$ ";
+	int len = _strlen(prompt_shell);
+
 
 	while (1)
 	{
-		printf("#cisfun$ ");
+		write(STDOUT_FILENO, prompt_shell, len);
 		line = prompt();
 		if (line == NULL)
 		{
 			/*EOF(Ctrl + D) was dectected*/
-			printf("\n");
+			write(STDOUT_FILENO, "\n", 1);
 			free(line);
 		}
 		tokens =  _split(line);
@@ -59,11 +62,13 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 			line = prompt();
 			if (line == NULL)
 			{
-				printf("\n");
+				write(STDOUT_FILENO, "\n", 1);
 				free(line), line = NULL;
-				exit(EXIT_SUCCESS);
+				exit(0);
 			}
 			tokens = _split(line);
+			if (tokens == NULL)
+				continue;
 			execute(tokens, argv, env);
 		}
 	}

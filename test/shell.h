@@ -20,10 +20,17 @@ char *non_interactive();
 char *get_path(char *tokens);
 void free_array(char **tokens);
 char *_strdup(char *str);
-char *str_concat(char *s1, char *s2);
+char *_strcat(char *dest, char *src);
 int _strlen(char *s);
 char *_strcpy(char *dest, char *src);
 char *_strdup(char *str);
+char *_getenv(char *va_env);
+int _strcmp(char *s1, char *s2);
+char *_str_concate(char *dest, char *src);
+void erro_mess(void);
+int my_exit(char *input);
+
+
 
 
 #endif
