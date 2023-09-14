@@ -11,15 +11,8 @@ int execute(char **tokens, char **argv, char **env)
 	pid_t child_pid;
 	int status;
 	char *enter_command;
-
-	(void)argv;
 	
-	if ((strcmp(tokens[0], "env") == 0))
-	{
-		my_env(env);
-		free_array(tokens);
-		return (1);
-	}
+	(void)argv;
 
 	if (my_exit(tokens[0]))
 	{

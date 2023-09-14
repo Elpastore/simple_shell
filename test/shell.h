@@ -13,6 +13,7 @@ extern char **environ;
 #include <sys/stat.h>
 #include <dirent.h>
 
+
 char *prompt(void);
 char **_split(char *input);
 int execute(char **tokens, char **argv, char **env);
@@ -29,6 +30,9 @@ int _strcmp(char *s1, char *s2);
 char *_str_concate(char *dest, char *src);
 void erro_mess(void);
 int my_exit(char *input);
+void my_env(char **env);
+
+
 
 
 
