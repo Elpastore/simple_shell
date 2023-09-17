@@ -6,7 +6,7 @@
  * @env: environmen
  * Return: 0 if success.
  */
-int execute(char **tokens, char **argv, char **env)
+int execute(char **tokens, char **argv, char **env, int number)
 {
 	pid_t child_pid;
 	int status;
@@ -35,12 +35,7 @@ int execute(char **tokens, char **argv, char **env)
 	if (enter_command == NULL)
 	{
 		/*empty command was entered*/
-		write(STDERR_FILENO,argv[0], _strlen(argv[0]));
-		write(STDERR_FILENO, ": ", 2);
-		write(STDERR_FILENO, tokens[0], _strlen(tokens[0]));
-		write(STDERR_FILENO, ": ", 2);
-		erro_mess();
-		write(STDERR_FILENO, "\n", 1);
+		erro_mess(argv[0], tokens[0], number);
 		free_array(tokens);
 		free(enter_command), enter_command = NULL;
 		return (1);

@@ -12,6 +12,7 @@ void interactive_mode(char **argv, char **env)
 	char **tokens;
 	char *prompt_shell = "#cisfun$ ";
 	int len = _strlen(prompt_shell);
+	int number = 0;
 
 
 	while (1)
@@ -27,7 +28,8 @@ void interactive_mode(char **argv, char **env)
 		tokens =  _split(line);
 		if (tokens == NULL)
 			continue;
-		execute(tokens, argv, env);
+		number++;
+		execute(tokens, argv, env, number);
 		/*let's free each element of array*/
 		/*free the array itself*/
 
@@ -49,6 +51,7 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 	char *line;
 	/*char *command[] = {NULL, NULL};*/
 	char **tokens;
+	int number = 0;
 
 	if (isatty(STDIN_FILENO) == 1) /*check if we are in interactive mode*/
 	{
@@ -69,7 +72,8 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 			tokens = _split(line);
 			if (tokens == NULL)
 				continue;
-			execute(tokens, argv, env);
+			number++;
+			execute(tokens, argv, env, number);
 		}
 	}
 	return (0);

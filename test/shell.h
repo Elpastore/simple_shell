@@ -16,7 +16,7 @@ extern char **environ;
 
 char *prompt(void);
 char **_split(char *input);
-int execute(char **tokens, char **argv, char **env);
+int execute(char **tokens, char **argv, char **env, int number);
 char *non_interactive();
 char *get_path(char *tokens);
 void free_array(char **tokens);
@@ -28,9 +28,11 @@ char *_strdup(char *str);
 char *_getenv(char *va_env);
 int _strcmp(char *s1, char *s2);
 char *_str_concate(char *dest, char *src);
-void erro_mess(void);
+void erro_mess(char *name, char *input, int number);
 int my_exit(char *input);
 void my_env(char **env);
+char *convert_number(int num);
+void erro_mess(char *name, char *input, int number);
 
 
 
