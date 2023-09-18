@@ -10,7 +10,9 @@ char *prompt(void)
 	ssize_t nread;
 
 	nread = getline(&line, &count, stdin);
-	if (nread == -1)
+
+	/*nread = _getline(&line, &count, 0);*/
+	if (nread == - 1)
 	{
 		if (feof(stdin)) /*test for eof*/
 		{
@@ -21,7 +23,7 @@ char *prompt(void)
 		else
 		{
 			free(line);
-			perror("getline");
+			/*perror("getline");*/
 			exit(127);
 		}
 	}

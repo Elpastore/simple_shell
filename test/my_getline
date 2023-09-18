@@ -1,0 +1,59 @@
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+ssize_t _getline(char **lineptr, size_t *bytes, int fd)
+{
+	static char *buffer = NULL;
+	static ssize_t bufferSize = 0;
+	ssize_t nread, totalBytes;
+	char ch;
+	char *newBuffer;
+	if (lineptr == NULL || bytes == NULL)
+	{
+		return (-1); /*Invalid arguments*/
+	}
+       	nread = 0;
+	
+	if (buffer == NULL)
+	{
+		bufferSize = 128;  /* Initial buffer size*/
+		buffer = malloc(sizeof(char *) * bufferSize);
+		if (buffer == NULL)
+		{
+			return (-1);  /*Memory allocation error*/
+		}
+	}
+	totalBytes = 0;
+       	while (1)
+	{
+		nread = read(fd, &ch, 1);
+		if (nread < 0)
+		{
+			/*free(buffer);*/
+			return (-1);  /*Read error*/
+		}
+		else if (nread == 0 || ch == '\n')
+		{
+			buffer[totalBytes] = '\0';
+			*lineptr = buffer;
+			*bytes = totalBytes;
+			return (totalBytes);
+		}else
+		{
+			buffer[totalBytes] = ch;
+			totalBytes++;
+			if (totalBytes >= bufferSize)
+			{
+				bufferSize *= 2;  /*Double the buffer size*/
+				newBuffer = (char *)realloc(buffer, bufferSize);
+				if (newBuffer == NULL)
+				{
+					/*free(buffer);*/
+					return (-1);  /*Memory allocation error*/
+				}
+				buffer = newBuffer;
+			}
+		}
+	}
+}

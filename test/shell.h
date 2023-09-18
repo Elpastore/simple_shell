@@ -33,8 +33,6 @@ int my_exit(char *input);
 void my_env(char **env);
 char *convert_number(int num);
 void erro_mess(char *name, char *input, int number);
-
-
-
+ssize_t _getline(char **lineptr, size_t *n, int fd);
 
 #endif

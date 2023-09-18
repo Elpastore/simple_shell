@@ -14,7 +14,9 @@ char **_split(char *input)
 	char *cp_input = NULL;
 
 	if (input == NULL)
+	{	
 		return (NULL);
+	}
 	cp_input = _strdup(input);
 
 	token = strtok(cp_input, " \t\n");

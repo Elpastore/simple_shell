@@ -1,5 +1,10 @@
 #include "shell.h"
 
+void sigint_handler()
+{
+
+}
+ 
 /**
  * interactive_mode - shell interaction mode
  * @argv: array of argument
@@ -17,6 +22,11 @@ void interactive_mode(char **argv, char **env)
 
 	while (1)
 	{
+		if (signal(SIGINT, sigint_handler) == SIG_ERR)
+		{
+			perror("signal");
+			exit(EXIT_FAILURE);
+		}
 		write(STDOUT_FILENO, prompt_shell, len);
 		line = prompt();
 		if (line == NULL)
@@ -27,7 +37,9 @@ void interactive_mode(char **argv, char **env)
 		}
 		tokens =  _split(line);
 		if (tokens == NULL)
+		{
 			continue;
+		}
 		number++;
 		execute(tokens, argv, env, number);
 		/*let's free each element of array*/

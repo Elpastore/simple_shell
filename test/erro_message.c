@@ -2,7 +2,7 @@
 void erro_mess(char *name, char *input, int number)
 {
 	char *convert = convert_number(number);/*allocated memory from convert_number*/
-	char *message = ": not found\n";
+	char *message = ": not found";
 	int len_message = _strlen(message);
 
 	write(STDERR_FILENO,name, _strlen(name));
