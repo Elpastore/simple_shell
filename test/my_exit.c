@@ -6,5 +6,5 @@
  */
 int my_exit(char *input)
 {
-	return(strcmp(input, "exit") == 0);
+	return (strcmp(input, "exit") == 0);
 }

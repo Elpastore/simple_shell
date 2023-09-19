@@ -6,7 +6,6 @@
  */
 char **_split(char *input)
 {
-	/*int i = 0;*/
 	int count = 0;
 	int numb_tok = 0;
 	char *token = NULL;
@@ -14,11 +13,10 @@ char **_split(char *input)
 	char *cp_input = NULL;
 
 	if (input == NULL)
-	{	
+	{
 		return (NULL);
 	}
 	cp_input = _strdup(input);
-
 	token = strtok(cp_input, " \t\n");
 	if (token == NULL)
 	{
@@ -35,7 +33,6 @@ char **_split(char *input)
 	if (tokens == NULL)
 	{
 		free(input), input = NULL;
-		/*free(cp_input), cp_input = NULL;*/
 		return (NULL);
 	}
 
@@ -46,9 +43,7 @@ char **_split(char *input)
 		token = strtok(NULL, " \t\n"); /*get the next token*/
 	}
 	tokens[count] = NULL;
-
 	free(input), input = NULL;
 	free(cp_input), cp_input = NULL;
 	return (tokens);
 }
-

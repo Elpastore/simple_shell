@@ -1,10 +1,13 @@
 #include "shell.h"
-
+/**
+ * sigint_handler - function to send signal for ctrl + c
+ */
 void sigint_handler()
 {
+	char *prompt_shell = "\n#cisfun$ ";
 
+	write(STDOUT_FILENO, prompt_shell, _strlen(prompt_shell));
 }
- 
 /**
  * interactive_mode - shell interaction mode
  * @argv: array of argument
@@ -77,9 +80,9 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 			line = prompt();
 			if (line == NULL)
 			{
-				write(STDOUT_FILENO, "\n", 1);
+				/*write(STDOUT_FILENO, "\n", 1);*/
 				free(line), line = NULL;
-				exit(0);
+				exit(EXIT_SUCCESS);
 			}
 			tokens = _split(line);
 			if (tokens == NULL)

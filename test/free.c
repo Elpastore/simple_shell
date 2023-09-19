@@ -6,6 +6,7 @@
 void free_array(char **tokens)
 {
 	int i;
+
 	if (tokens == NULL)
 		return;
 	/*let's free each element of array*/

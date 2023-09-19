@@ -17,12 +17,11 @@ char *convert_number(int num)
 		num = -num;
 	}
 
-	do
-	{
+	do {
 		buffer[len++] = num % 10 + '0';
 		num /= 10;
 	} while (num > 0);
-	
+
 	buffer[len] = '\0';
 
     /* Reverse the string*/

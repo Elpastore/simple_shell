@@ -12,7 +12,12 @@ extern char **environ;
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <dirent.h>
+#include <errno.h>
 
+struct builtin {
+	char *name;
+	void (*f)(char **tokens);
+};
 
 char *prompt(void);
 char **_split(char *input);
@@ -34,5 +39,8 @@ void my_env(char **env);
 char *convert_number(int num);
 void erro_mess(char *name, char *input, int number);
 ssize_t _getline(char **lineptr, size_t *n, int fd);
+int my_setenv(char *name, char *value, int overwrite);
+int my_unsetenv(char *name);
+void my_cd(char **tokens);
 
 #endif

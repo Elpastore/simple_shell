@@ -12,19 +12,19 @@ char *prompt(void)
 	nread = getline(&line, &count, stdin);
 
 	/*nread = _getline(&line, &count, 0);*/
-	if (nread == - 1)
+	if (nread == -1)
 	{
 		if (feof(stdin)) /*test for eof*/
 		{
 			free(line);
-			write(STDOUT_FILENO, "\n", 1);
-			exit(0);
+			/*write(STDOUT_FILENO, "\n", 1);*/
+			exit(EXIT_SUCCESS);
 		}
 		else
 		{
 			free(line);
 			/*perror("getline");*/
-			exit(127);
+			exit(EXIT_FAILURE);
 		}
 	}
 	/* Delete new line char*/
