@@ -14,6 +14,11 @@ extern char **environ;
 #include <dirent.h>
 #include <errno.h>
 
+/**
+ * struct builtin - structure hold command name and function
+ * @name: name of command
+ * @f: specific function
+ */
 struct builtin {
 	char *name;
 	void (*f)(char **tokens);
@@ -42,5 +47,6 @@ ssize_t _getline(char **lineptr, size_t *n, int fd);
 int my_setenv(char *name, char *value, int overwrite);
 int my_unsetenv(char *name);
 void my_cd(char **tokens);
+int _strcmp(char *s1, char *s2);
 
 #endif

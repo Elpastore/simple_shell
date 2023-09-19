@@ -16,7 +16,7 @@ char *_getenv(char *va_env)
 	{
 		temp = _strdup(environ[i]);
 		token = strtok(temp, "=");
-		if (strcmp(token, va_env) == 0)/*search for env variable*/
+		if (_strcmp(token, va_env) == 0)/*search for env variable*/
 		{
 			next = strtok(NULL, "\n");/**pass to the next environment
 						    * separe by the previous by \n

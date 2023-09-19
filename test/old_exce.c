@@ -30,7 +30,7 @@ int execute(char **tokens, char **argv, char **env, int number)
 
 	for (i = 0; commands[i].name != NULL; i++)
 	{
-		if (strcmp(tokens[0], commands[i].name) == 0)
+		if (_strcmp(tokens[0], commands[i].name) == 0)
 		{
 			commands[i].f(tokens);
 			free(enter_command), enter_command = NULL;
@@ -38,7 +38,7 @@ int execute(char **tokens, char **argv, char **env, int number)
 			return (1);
 		}
 	}
-	if ((strcmp(tokens[0], "env") == 0))
+	if ((_strcmp(tokens[0], "env") == 0))
 	{
 		my_env(env);
 
