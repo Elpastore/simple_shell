@@ -19,7 +19,8 @@ extern char **environ;
  * @name: name of command
  * @f: specific function
  */
-struct builtin {
+struct builtin
+{
 	char *name;
 	void (*f)(char **tokens);
 };
