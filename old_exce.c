@@ -66,7 +66,7 @@ int execute(char **tokens, char **argv, char **env, int number)
 		}
 	}
 
-	if (enter_command == NULL)
+	if (enter_command == NULL || ((_strcmp(tokens[0], "hbtn_ls") == 0) && tokens[1] == NULL))
 	{
 		/*empty command was entered*/
 		erro_mess(argv[0], tokens[0], number);
