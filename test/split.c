@@ -17,7 +17,7 @@ char **_split(char *input)
 		return (NULL);
 	}
 	cp_input = _strdup(input);
-	token = strtok(cp_input, " \t\n");
+	token = strtok(cp_input, " \t\r\n\a\"");
 	if (token == NULL)
 	{
 		free(input), input =  NULL;
@@ -27,7 +27,7 @@ char **_split(char *input)
 	while (token != NULL)
 	{
 		numb_tok++;
-		token = strtok(NULL, " \t\n");
+		token = strtok(NULL, " \t\r\n\a\"");
 	}
 	tokens = malloc((sizeof(char *) * (numb_tok + 1)));
 	if (tokens == NULL)
@@ -36,11 +36,11 @@ char **_split(char *input)
 		return (NULL);
 	}
 
-	token = strtok(input, " \t\n");
+	token = strtok(input, " \t\r\n\a\"");
 	while (token != NULL)
 	{
 		tokens[count++] = _strdup(token);
-		token = strtok(NULL, " \t\n"); /*get the next token*/
+		token = strtok(NULL, " \t\r\n\a\""); /*get the next token*/
 	}
 	tokens[count] = NULL;
 	free(input), input = NULL;

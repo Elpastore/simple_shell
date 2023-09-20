@@ -61,7 +61,8 @@ int execute(char **tokens, char **argv, char **env, int number)
 		else
 		{
 			free_array(tokens);
-			exit(EXIT_SUCCESS);
+			exit(2);
+			/*exit(EXIT_SUCCESS);*/
 		}
 	}
 
@@ -72,8 +73,8 @@ int execute(char **tokens, char **argv, char **env, int number)
 		free_array(tokens);
 		free(enter_command), enter_command = NULL;
 		/*exit(2);*/
-		/*exit(EXIT_SUCCESS);*/
-		return (1);
+		exit(127);
+		/*return (1);*/
 	}
 	/* Create a loop to execute 5 times a child process*/
 	else

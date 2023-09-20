@@ -77,7 +77,8 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 		while (1)
 		{
 			/*line = non_interactive();*/
-			line = prompt();
+			/*line = prompt();*/
+			line = non_interactive();
 			if (line == NULL)
 			{
 				/*write(STDOUT_FILENO, "\n", 1);*/
